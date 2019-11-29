@@ -200,9 +200,9 @@ sio.on('connection', function (socket) {
             }
           } else {
             db.collection('userpost').insertOne({
-              "title": recTitle,
-              "content": recContent,
-              "publisher": recPublisher
+              title: recTitle,
+              content: recContent,
+              publisher: recPublisher
             })
             socket.emit('created')
             client.close()
