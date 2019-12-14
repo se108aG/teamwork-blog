@@ -24,6 +24,24 @@ model.userLogin = async function (db, collection, data) {
     })
 }
 
+model.userRegist = async function(db, collection, data) {
+    db = await client.db(db)
+    await db.collection(collection).insertOne({
+        account: data.account,
+        password: data.password
+    })
+}
+
+model.po = async function(db, collection, data) {
+    db = await client.db(db)
+    await db.collection(collection).insertOne({
+        title: data.title,
+        content: data.content,
+        publisher: data.publisher // 等同帳號
+    })
+}
+//方洛飛大傻逼 都不寫註解
+
 model.close = async function () {
     await client.close()
 }
