@@ -29,6 +29,23 @@ async function Controller(srv) {
             }
         })
 
+        socket.on('getAcnt', function (data) {
+          
+          var modelCursor = model.getCursor('loginUsers', 'users')
+          modelCursor.then(function (cursor) {
+            cursor.each(function (err, doc) {
+              if (doc) {
+                if (data.sessionId == doc.uuid) {
+                  var userAcnt = doc.account
+                  socket.emit('accountConfirm', {
+                    account: userAcnt
+                  })
+                }
+              }
+            })
+          })
+        })
+
         socket.on('login', function (data) {
           var uuid = data.sessionId
           var recAcnt = data.acnt
